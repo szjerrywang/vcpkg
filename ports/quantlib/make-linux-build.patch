@@ -1,0 +1,94 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 62ab08a11..444232b2a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,7 +1,10 @@
+-cmake_minimum_required()
++cmake_minimum_required(VERSION 3.10)
+ 
+ project(QuantLib)
+ 
++set(CMAKE_CXX_STANDARD 17)
++set(CMAKE_CXX_STANDARD_REQUIRED True)
++
+ include(CTest)
+ include(${CMAKE_CURRENT_LIST_DIR}/cmake/quantlib.cmake)
+ 
+@@ -39,14 +42,14 @@ endif()
+ # directory of the project to includes
+ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+ 
+-find_package(Boost 1.48.0)
++find_package(Boost 1.75.0)
+ if (Boost_FOUND)
+   include_directories(${Boost_INCLUDE_DIRS})
+ endif (Boost_FOUND)
+ 
+ add_subdirectory(ql)
+-add_subdirectory(Examples)
+-add_subdirectory(test-suite)
++# add_subdirectory(Examples)
++# add_subdirectory(test-suite)
+ 
+ #
+ # Copy across the ANSI config file into the build directory. Users
+diff --git a/ql/userconfig.hpp b/ql/userconfig.hpp
+index 43c90abb0..cf92f65d3 100644
+--- a/ql/userconfig.hpp
++++ b/ql/userconfig.hpp
+@@ -33,12 +33,12 @@
+ /* Define this if error messages should include current function
+    information. */
+ #ifndef QL_ERROR_FUNCTIONS
+-//#   define QL_ERROR_FUNCTIONS
++   #define QL_ERROR_FUNCTIONS
+ #endif
+ 
+ /* Define this if error messages should include file and line information. */
+ #ifndef QL_ERROR_LINES
+-//#   define QL_ERROR_LINES
++   #define QL_ERROR_LINES
+ #endif
+ 
+ /* Define this if tracing messages should be allowed (whether they are
+@@ -72,7 +72,7 @@
+    the JVM or .NET eco system or any environment with an
+    async garbage collector */
+ #ifndef QL_ENABLE_THREAD_SAFE_OBSERVER_PATTERN
+-//#    define QL_ENABLE_THREAD_SAFE_OBSERVER_PATTERN
++   #define QL_ENABLE_THREAD_SAFE_OBSERVER_PATTERN
+ #endif
+ 
+ /* Define this to enable a date resolution down to microseconds and
+@@ -86,27 +86,27 @@
+    C++11.  Note that std::shared_ptr does not check access and can
+    cause segmentation faults. */
+ #ifndef QL_USE_STD_SHARED_PTR
+-//#    define QL_USE_STD_SHARED_PTR
++   #define QL_USE_STD_SHARED_PTR
+ #endif
+ 
+ /* Define this to replace std::auto_ptr with std::unique_ptr.
+    This requires you to set your compiler's standard to at least C++11. */
+ #ifndef QL_USE_STD_UNIQUE_PTR
+-//#    define QL_USE_STD_UNIQUE_PTR
++   #define QL_USE_STD_UNIQUE_PTR
+ #endif
+ 
+ /* Define this to use std::function and std::bind instead of
+    boost::function and boost::bind.  This requires you to set your
+    compiler's standard to at least C++11. */
+ #ifndef QL_USE_STD_FUNCTION
+-//#    define QL_USE_STD_FUNCTION
++   #define QL_USE_STD_FUNCTION
+ #endif
+ 
+ /* Define this to use std::tuple instead of
+    boost::function and boost::bind.  This requires you to set your
+    compiler's standard to at least C++11. */
+ #ifndef QL_USE_STD_TUPLE
+-//#    define QL_USE_STD_TUPLE
++   #define QL_USE_STD_TUPLE
+ #endif
+ 
+ /* Define this to enable the parallel unit test runner */
